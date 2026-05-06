@@ -3,12 +3,18 @@ use std::net::SocketAddr;
 use tower_http::trace::TraceLayer;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
+mod config;
+mod errors;
+use config::Config;
+
 #[tokio::main]
 async fn main() {
+    let config = Config::from_env();
+    tracing::info!("Config loaded successfully");
     tracing_subscriber::registry()
         .with(
             tracing_subscriber::EnvFilter::try_from_default_env()
-                .unwrap_or_else(|_| "mainline_backend=debug, tower_http=debug".into()),
+                .unwrap_or_else(|_| "sharplines_backend=debug, tower_http=debug".into()),
         )
         .with(tracing_subscriber::fmt::layer())
         .init();

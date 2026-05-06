@@ -3,12 +3,12 @@ version: "3.8"
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: mainline-postgres
+    container_name: sharplines-postgres
 
     environment:
-      POSTGRES_USER: mainline
-      POSTGRES_PASSWORD: mainline
-      POSTGRES_DB: mainline
+      POSTGRES_USER: sharplines
+      POSTGRES_PASSWORD: sharplines
+      POSTGRES_DB: sharplines
 
     ports:
       - "5432:5432"
