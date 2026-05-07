@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>Sharplines | Coming Soon</title>
+<link rel="icon" type="image/svg+xml" href="logo.svg" />
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#00285d",
+                    "secondary-fixed": "#ffe088",
+                    "on-secondary-fixed": "#241a00",
+                    "on-surface-variant": "#c2c6d6",
+                    "surface-container-highest": "#2d3449",
+                    "outline-variant": "#424754",
+                    "inverse-surface": "#dae2fd",
+                    "tertiary": "#c6c6c7",
+                    "tertiary-container": "#909191",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-primary-fixed-variant": "#004395",
+                    "primary-fixed-dim": "#adc6ff",
+                    "on-tertiary-container": "#282a2a",
+                    "inverse-on-surface": "#283044",
+                    "outline": "#8c909f",
+                    "surface-bright": "#31394d",
+                    "surface-container": "#171f33",
+                    "primary": "#adc6ff",
+                    "background": "#0b1326",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "surface-dim": "#0b1326",
+                    "surface": "#0b1326",
+                    "on-surface": "#dae2fd",
+                    "secondary-fixed-dim": "#e9c349",
+                    "error": "#ffb4ab",
+                    "on-tertiary": "#2f3131",
+                    "surface-container-low": "#131b2e",
+                    "error-container": "#93000a",
+                    "inverse-primary": "#005ac2",
+                    "surface-container-high": "#222a3d",
+                    "on-secondary-container": "#342800",
+                    "surface-tint": "#adc6ff",
+                    "surface-variant": "#2d3449",
+                    "on-primary": "#002e6a",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-secondary": "#3c2f00",
+                    "on-background": "#dae2fd",
+                    "primary-fixed": "#d8e2ff",
+                    "on-error": "#690005",
+                    "on-primary-fixed": "#001a42"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "lg": "24px",
+                    "xs": "4px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "grid-gutter": "16px",
+                    "xl": "32px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "body-main": ["Inter"],
+                    "notation": ["JetBrains Mono"],
+                    "body-sm": ["Inter"],
+                    "h1": ["Inter"],
+                    "h3": ["Inter"],
+                    "code-lg": ["JetBrains Mono"],
+                    "code-sm": ["JetBrains Mono"],
+                    "h2": ["Inter"]
+            },
+            "fontSize": {
+                    "body-main": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "notation": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "h3": ["20px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                    "code-lg": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "500"}],
+                    "code-sm": ["13px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "400"}],
+                    "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .custom-grid-bg {
+            background-image: 
+                linear-gradient(to right, #1e293b 1px, transparent 1px),
+                linear-gradient(to bottom, #1e293b 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .terminal-shadow {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-main selection:bg-primary selection:text-on-primary min-h-screen flex flex-col">
+<header class="bg-surface-container border-b border-outline-variant sticky top-0 z-50">
+<nav class="flex justify-between items-center w-full px-lg max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-sm">
+<img src="logo.svg" alt="Sharplines" class="h-8 w-8" />
+<span class="text-h2 font-h2 text-on-surface tracking-tight">Sharplines</span>
+</div>
+<a href="https://github.com/MrSheerluck/sharplines" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant hover:text-primary transition-colors">
+<svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+</a>
+</nav>
+</header>
+<main class="flex-grow flex items-center relative overflow-hidden">
+<div class="absolute inset-0 custom-grid-bg opacity-30 pointer-events-none"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10 max-w-container-max mx-auto w-full px-lg py-xl text-center md:text-left grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+<div class="space-y-xl">
+<div class="inline-flex items-center gap-sm bg-surface-container-high border border-outline-variant px-sm py-xs rounded-full">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span>
+<span class="text-body-sm font-notation uppercase tracking-widest text-secondary-fixed-dim">Coming Soon</span>
+</div>
+<h1 class="font-h1 text-5xl md:text-6xl lg:text-7xl text-on-surface max-w-2xl leading-tight">
+                        Master Your Opening Repertoire, <span class="text-primary italic">Deepen Your Analysis.</span>
+</h1>
+<p class="text-body-main text-on-surface-variant max-w-xl text-lg md:text-xl">
+                        A high-performance analytics suite designed for serious chess players. Leverage deep engine evaluation and uncompromising precision to elevate your preparation.
+                    </p>
+<div class="pt-md">
+<form class="flex flex-col sm:flex-row gap-sm max-w-md w-full" action="/api/waitlist" method="POST">
+<input class="flex-1 bg-surface-container-highest border border-outline-variant text-on-surface placeholder:text-outline rounded-lg px-md py-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" name="email" placeholder="Enter your email address" required="" type="email"/>
+<button class="bg-primary text-on-primary text-h3 py-md px-lg rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap cursor-pointer" type="submit">
+                                Join the Wishlist
+                            </button>
+</form>
+<p class="text-body-sm text-outline mt-sm" id="form-message">Be the first to know when we launch early access.</p>
+</div>
+</div>
+<div class="hidden lg:block relative">
+<div class="bg-surface-container-low border border-outline-variant rounded-xl p-lg terminal-shadow overflow-hidden">
+<img
+    src="chess-animation.gif"
+    alt="Chess board animation"
+    class="w-full h-full object-contain aspect-square"
+    onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 400%22><rect fill=%22%23171f33%22 width=%22400%22 height=%22400%22/><text x=%22200%22 y=%22200%22 text-anchor=%22middle%22 fill=%22%238c909f%22 font-family=%22Inter%22 font-size=%2214%22>Place your GIF here</text></svg>'"
+/>
+</div>
+</div>
+</div>
+</main>
+<footer class="bg-surface-container border-t border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-lg py-md max-w-container-max mx-auto gap-md">
+<div class="flex items-center gap-sm">
+<img src="logo.svg" alt="Sharplines" class="h-6 w-6" />
+<span class="text-body-sm text-h3 text-on-surface-variant">Sharplines</span>
+<span class="text-body-sm text-outline">&copy; 2026. MIT License.</span>
+</div>
+<div class="flex items-center gap-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="https://x.com/sheerluck_io" target="_blank" rel="noopener noreferrer">
+<svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="https://bsky.app/profile/mrsheerluck.bsky.social" target="_blank" rel="noopener noreferrer">
+<svg class="w-5 h-5" viewBox="0 0 600 530" fill="currentColor"><path d="m135.72 44.03c66.496 49.921 138.02 151.14 164.28 205.46 26.262-54.316 97.782-155.54 164.28-205.46 47.98-36.021 125.72-63.892 125.72 24.795 0 17.712-10.155 148.79-16.111 170.07-20.703 73.984-96.144 92.854-163.25 81.433 117.3 19.964 147.14 86.092 82.697 152.22-122.39 125.59-175.91-31.511-189.63-71.766-2.514-7.3797-3.6904-10.832-3.7077-7.8964-0.0174-2.9357-1.1937 0.51669-3.7077 7.8964-13.714 40.255-67.233 197.36-189.63 71.766-64.444-66.128-34.605-132.26 82.697-152.22-67.108 11.421-142.55-7.4491-163.25-81.433-5.9562-21.282-16.111-152.36-16.111-170.07 0-88.687 77.742-60.816 125.72-24.795z"/></svg>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="https://blog.sheerluck.dev" target="_blank" rel="noopener noreferrer">
+<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/><path d="M8 6h8"/><path d="M8 10h8"/><path d="M8 14h4"/></svg>
+</a>
+</div>
+</div>
+</footer>
+
+</script>
+</body>
+<script>
+(function() {
+    var params = new URLSearchParams(window.location.search);
+    var msg = document.getElementById('form-message');
+    if (params.get('subscribed') === 'true') {
+        msg.textContent = 'You\'re on the list! We\'ll let you know when we launch.';
+        msg.className = 'text-body-sm text-primary mt-sm';
+    } else if (params.get('already') === 'true') {
+        msg.textContent = 'You\'re already subscribed!';
+        msg.className = 'text-body-sm text-secondary-fixed-dim mt-sm';
+    }
+})();
+</script>
+</html>
