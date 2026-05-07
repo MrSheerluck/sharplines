@@ -1,0 +1,7 @@
+name = "sharplines"
+pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "sharplines_waitlist"
+database_name = "sharplines-waitlist"
+database_id = "686bb505-efaf-4f08-9ed7-522fd4bc6c41"
