@@ -24,7 +24,7 @@ describe("Login Page", () => {
     render(Page);
     await userEvent.type(screen.getByLabelText("Email"), "test@example.com");
     await userEvent.type(screen.getByLabelText("Password"), "password123");
-    await userEvent.click(screen.getByRole("button", { name: /log in/i }));
+    await userEvent.click(screen.getByRole("button", { name: /login/i }));
     expect(vi.mocked(mockLogin)).toHaveBeenCalledWith(
       "test@example.com",
       "password123",
@@ -39,7 +39,7 @@ describe("Login Page", () => {
     render(Page);
     await userEvent.type(screen.getByLabelText("Email"), "test@example.com");
     await userEvent.type(screen.getByLabelText("Password"), "wrong");
-    await userEvent.click(screen.getByRole("button", { name: /log in/i }));
+    await userEvent.click(screen.getByRole("button", { name: /login/i }));
     expect(await screen.findByRole("alert")).toHaveTextContent(
       "Invalid credentials",
     );
@@ -56,7 +56,7 @@ describe("Login Page", () => {
     render(Page);
     await userEvent.type(screen.getByLabelText("Email"), "test@example.com");
     await userEvent.type(screen.getByLabelText("Password"), "password123");
-    await userEvent.click(screen.getByRole("button", { name: /log in/i }));
+    await userEvent.click(screen.getByRole("button", { name: /login/i }));
     expect(screen.getByRole("button", { name: /logging in/i })).toBeDisabled();
     resolvePromise();
   });
@@ -64,13 +64,13 @@ describe("Login Page", () => {
   it("shows validation error for empty email", async () => {
     render(Page);
     await userEvent.type(screen.getByLabelText("Password"), "password123");
-    await userEvent.click(screen.getByRole("button", { name: /log in/i }));
+    await userEvent.click(screen.getByRole("button", { name: /login/i }));
     expect(screen.getByRole("alert")).toHaveTextContent("Email is required");
   });
 
   it("has a link to the register page", () => {
     render(Page);
-    expect(screen.getByRole("link", { name: /register/i })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "Create an account" })).toHaveAttribute(
       "href",
       "/register",
     );
