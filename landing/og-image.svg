@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <pattern id="grid" patternUnits="userSpaceOnUse" width="40" height="40">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="1" opacity="0.3"/>
+    </pattern>
+    <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1326"/>
+      <stop offset="100%" stop-color="#0b1326"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0b1326"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glow)" opacity="0.5"/>
+
+  <!-- Glow behind logo -->
+  <ellipse cx="600" cy="250" rx="300" ry="200" fill="#adc6ff" opacity="0.06"/>
+
+  <!-- Pixel Rook Logo -->
+  <g transform="translate(520, 120) scale(2.5)">
+    <path fill="#d8e2ff" d="M 8,0 h8 v8 h-8 Z M 16,0 h8 v8 h-8 Z M 24,0 h8 v8 h-8 Z M 32,0 h8 v8 h-8 Z M 40,0 h8 v8 h-8 Z M 48,0 h8 v8 h-8 Z M 56,0 h8 v8 h-8 Z M 64,0 h8 v8 h-8 Z M 8,8 h8 v8 h-8 Z M 8,16 h8 v8 h-8 Z M 56,16 h8 v8 h-8 Z M 8,24 h8 v8 h-8 Z M 8,32 h8 v8 h-8 Z M 16,40 h8 v8 h-8 Z M 16,48 h8 v8 h-8 Z M 16,56 h8 v8 h-8 Z M 16,64 h8 v8 h-8 Z M 16,72 h8 v8 h-8 Z M 8,80 h8 v8 h-8 Z M 8,88 h8 v8 h-8 Z M 0,96 h8 v8 h-8 Z M 0,104 h8 v8 h-8 Z"/>
+    <path fill="#adc6ff" d="M 16,8 h8 v8 h-8 Z M 24,8 h8 v8 h-8 Z M 32,8 h8 v8 h-8 Z M 40,8 h8 v8 h-8 Z M 48,8 h8 v8 h-8 Z M 56,8 h8 v8 h-8 Z M 16,16 h8 v8 h-8 Z M 16,24 h8 v8 h-8 Z M 24,24 h8 v8 h-8 Z M 32,24 h8 v8 h-8 Z M 40,24 h8 v8 h-8 Z M 48,24 h8 v8 h-8 Z M 56,24 h8 v8 h-8 Z M 16,32 h8 v8 h-8 Z M 24,32 h8 v8 h-8 Z M 32,32 h8 v8 h-8 Z M 40,32 h8 v8 h-8 Z M 48,32 h8 v8 h-8 Z M 56,32 h8 v8 h-8 Z M 24,40 h8 v8 h-8 Z M 32,40 h8 v8 h-8 Z M 40,40 h8 v8 h-8 Z M 48,40 h8 v8 h-8 Z M 24,48 h8 v8 h-8 Z M 32,48 h8 v8 h-8 Z M 40,48 h8 v8 h-8 Z M 48,48 h8 v8 h-8 Z M 24,56 h8 v8 h-8 Z M 32,56 h8 v8 h-8 Z M 40,56 h8 v8 h-8 Z M 48,56 h8 v8 h-8 Z M 24,64 h8 v8 h-8 Z M 32,64 h8 v8 h-8 Z M 40,64 h8 v8 h-8 Z M 48,64 h8 v8 h-8 Z M 24,72 h8 v8 h-8 Z M 32,72 h8 v8 h-8 Z M 40,72 h8 v8 h-8 Z M 48,72 h8 v8 h-8 Z M 16,80 h8 v8 h-8 Z M 24,80 h8 v8 h-8 Z M 32,80 h8 v8 h-8 Z M 40,80 h8 v8 h-8 Z M 48,80 h8 v8 h-8 Z M 56,80 h8 v8 h-8 Z M 16,88 h8 v8 h-8 Z M 24,88 h8 v8 h-8 Z M 32,88 h8 v8 h-8 Z M 40,88 h8 v8 h-8 Z M 48,88 h8 v8 h-8 Z M 56,88 h8 v8 h-8 Z M 8,96 h8 v8 h-8 Z M 16,96 h8 v8 h-8 Z M 24,96 h8 v8 h-8 Z M 32,96 h8 v8 h-8 Z M 40,96 h8 v8 h-8 Z M 48,96 h8 v8 h-8 Z M 56,96 h8 v8 h-8 Z M 64,96 h8 v8 h-8 Z M 8,104 h8 v8 h-8 Z M 16,104 h8 v8 h-8 Z M 24,104 h8 v8 h-8 Z M 32,104 h8 v8 h-8 Z M 40,104 h8 v8 h-8 Z M 48,104 h8 v8 h-8 Z M 56,104 h8 v8 h-8 Z M 64,104 h8 v8 h-8 Z"/>
+    <path fill="#7a9ee0" d="M 64,8 h8 v8 h-8 Z M 16,16 h8 v8 h-8 Z M 64,16 h8 v8 h-8 Z M 64,24 h8 v8 h-8 Z M 64,32 h8 v8 h-8 Z M 56,40 h8 v8 h-8 Z M 56,48 h8 v8 h-8 Z M 56,56 h8 v8 h-8 Z M 56,64 h8 v8 h-8 Z M 56,72 h8 v8 h-8 Z M 64,80 h8 v8 h-8 Z M 64,88 h8 v8 h-8 Z M 72,96 h8 v8 h-8 Z M 72,104 h8 v8 h-8 Z"/>
+  </g>
+
+  <!-- Tag -->
+  <g transform="translate(600, 370)">
+    <rect x="-70" y="0" width="140" height="28" rx="14" fill="#222a3d" stroke="#424754" stroke-width="1"/>
+    <circle cx="-52" cy="14" r="4" fill="#e9c349"/>
+    <text x="0" y="19" text-anchor="middle" fill="#e9c349" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" letter-spacing="2">COMING SOON</text>
+  </g>
+
+  <!-- Title -->
+  <text x="600" y="430" text-anchor="middle" fill="#dae2fd" font-family="Inter, sans-serif" font-size="48" font-weight="700" letter-spacing="-0.01em">Sharplines</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="480" text-anchor="middle" fill="#c2c6d6" font-family="Inter, sans-serif" font-size="20" font-weight="400">Master Your Opening Repertoire, Deepen Your Analysis.</text>
+
+  <!-- Engine eval line -->
+  <text x="600" y="560" text-anchor="middle" fill="#8c909f" font-family="'JetBrains Mono', monospace" font-size="14">Stockfish 16.1+ NNUE  ·  +0.48 depth 32</text>
+</svg>
