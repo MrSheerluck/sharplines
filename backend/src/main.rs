@@ -1,11 +1,11 @@
 use axum::http::header;
 use axum::{
-    Router, middleware,
+    Router,
     routing::{get, post},
 };
 use std::net::SocketAddr;
 
-use tower_http::cors::{AllowOrigin, Any, CorsLayer};
+use tower_http::cors::CorsLayer;
 use tower_http::trace::TraceLayer;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 mod auth;

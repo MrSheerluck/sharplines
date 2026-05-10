@@ -1,6 +1,6 @@
 use crate::AppState;
 use crate::auth::jwt::{generate_access_token, generate_refresh_token};
-use crate::models::user::{User, UserResponse};
+use crate::models::user::User;
 use axum::{
     Json,
     extract::{Query, State},

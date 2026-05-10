@@ -12,7 +12,7 @@ describe("App Layout", () => {
   it("shows login and register when unauthenticated", () => {
     vi.mocked(auth.getUser).mockReturnValue(null);
     vi.mocked(auth.getAccessToken).mockReturnValue(null);
-    render(Layout, { props: { children: () => "" } });
+    render(Layout, { props: { children: () => "" as any } });
     expect(screen.getByRole("link", { name: /log in/i })).toHaveAttribute(
       "href",
       "/login",
@@ -25,7 +25,7 @@ describe("App Layout", () => {
   it("shows logo and brand name", () => {
     vi.mocked(auth.getUser).mockReturnValue(null);
     vi.mocked(auth.getAccessToken).mockReturnValue(null);
-    render(Layout, { props: { children: () => "" } });
+    render(Layout, { props: { children: () => "" as any } });
     expect(screen.getAllByText("SharpLines").length).toBeGreaterThan(0);
   });
 
@@ -39,7 +39,7 @@ describe("App Layout", () => {
       created_at: "2026-01-01T00:00:00Z",
     });
     vi.mocked(auth.getAccessToken).mockReturnValue("valid-token");
-    render(Layout, { props: { children: () => "" } });
+    render(Layout, { props: { children: () => "" as any } });
     expect(screen.getByText("TestUser")).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /log out/i }),
