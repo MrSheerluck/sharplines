@@ -20,6 +20,11 @@ pub struct Config {
     pub lichess_client_id: String,
     pub lichess_client_secret: String,
     pub lichess_redirect_uri: String,
+
+    pub smtp_host: String,
+    pub smtp_port: u16,
+    pub smtp_username: String,
+    pub smtp_password: String,
 }
 
 impl Config {
@@ -40,6 +45,10 @@ impl Config {
             lichess_client_id: get_env("LICHESS_CLIENT_ID"),
             lichess_client_secret: get_env("LICHESS_CLIENT_SECRET"),
             lichess_redirect_uri: get_env("LICHESS_REDIRECT_URI"),
+            smtp_host: get_env("SMTP_HOST"),
+            smtp_port: get_env_parse("SMTP_PORT"),
+            smtp_username: get_env("SMTP_USERNAME"),
+            smtp_password: get_env("SMTP_PASSWORD"),
         }
     }
 }
