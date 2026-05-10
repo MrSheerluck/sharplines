@@ -5,6 +5,7 @@ import * as client from "$lib/api/client";
 vi.mock("$lib/api/client", () => ({
   post: vi.fn(),
   get: vi.fn(),
+  setAccessToken: vi.fn(),
 }));
 
 const mockUser = {
