@@ -7,19 +7,36 @@ use axum::{
     http::StatusCode,
     response::{IntoResponse, Redirect},
 };
+use base64::Engine as _;
 use serde::Deserialize;
 use serde_json::json;
-use sha2::Digest;
-
+use sha2::{Digest, Sha256};
 #[derive(Deserialize)]
 pub struct LichessCallbackParams {
     pub code: Option<String>,
     pub error: Option<String>,
+    pub state: Option<String>,
 }
 pub async fn login_lichess(State(state): State<AppState>) -> impl IntoResponse {
+    let code_verifier: String = (0..43)
+        .map(|_| {
+            let idx: u8 = rand::random::<u8>() % 64;
+            b"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~"[idx as usize]
+                as char
+        })
+        .collect();
+    let code_challenge = {
+        let mut hasher = Sha256::new();
+        hasher.update(code_verifier.as_bytes());
+        let hash = hasher.finalize();
+        base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(hash)
+    };
     let authorize_url = format!(
-        "https://lichess.org/oauth?response_type=code&client_id={}&redirect_uri={}&scope=preference:read",
-        state.config.lichess_client_id, state.config.lichess_redirect_uri,
+        "https://lichess.org/oauth?response_type=code&client_id={}&redirect_uri={}&scope=preference:read&state={}&code_challenge_method=S256&code_challenge={}",
+        state.config.lichess_client_id,
+        state.config.lichess_redirect_uri,
+        code_verifier,
+        code_challenge,
     );
     Redirect::to(&authorize_url)
 }
@@ -27,10 +44,10 @@ pub async fn lichess_callback(
     State(state): State<AppState>,
     Query(params): Query<LichessCallbackParams>,
 ) -> impl IntoResponse {
-    if let Some(_err) = params.error {
+    if let Some(err) = params.error {
         return (
             StatusCode::BAD_REQUEST,
-            Json(json!({"error": "Lichess authorization denied"})),
+            Json(json!({"error": format!("Lichess error: {}", err)})),
         )
             .into_response();
     }
@@ -44,7 +61,7 @@ pub async fn lichess_callback(
                 .into_response();
         }
     };
-    // Exchange code for token
+    let code_verifier = params.state.unwrap_or_default();
     let client = reqwest::Client::new();
     let token_response = client
         .post("https://lichess.org/api/token")
@@ -54,6 +71,7 @@ pub async fn lichess_callback(
             ("redirect_uri", &state.config.lichess_redirect_uri),
             ("client_id", &state.config.lichess_client_id),
             ("client_secret", &state.config.lichess_client_secret),
+            ("code_verifier", &code_verifier),
         ])
         .send()
         .await;
@@ -62,7 +80,11 @@ pub async fn lichess_callback(
         Ok(r) => {
             let status = r.status();
             let body = r.text().await.unwrap_or_default();
-            return (StatusCode::BAD_REQUEST, Json(json!({"error": format!("Lichess token exchange failed ({}): {}", status, body)}))).into_response();
+            return (
+                StatusCode::BAD_REQUEST,
+                Json(json!({"error": format!("Lichess token exchange failed ({}): {}", status, body)})),
+            )
+                .into_response();
         }
         Err(_) => {
             return (
@@ -82,7 +104,6 @@ pub async fn lichess_callback(
                 .into_response();
         }
     };
-    // Fetch user profile
     let profile = client
         .get("https://lichess.org/api/account")
         .header("Authorization", format!("Bearer {}", access_token))
@@ -116,7 +137,6 @@ pub async fn lichess_callback(
         .get("username")
         .and_then(|v| v.as_str())
         .map(|s| s.to_string());
-    // Find or create user
     let user = match sqlx::query_as::<_, User>("SELECT * FROM users WHERE lichess_user_id = $1")
         .bind(&lichess_id)
         .fetch_optional(&state.pool)
@@ -124,10 +144,9 @@ pub async fn lichess_callback(
     {
         Ok(Some(u)) => u,
         Ok(None) => {
-            // Create new user
             match sqlx::query_as::<_, User>(
                 "INSERT INTO users (email, display_name, lichess_user_id, lichess_access_token, email_verified) \
-                 VALUES ($1, $2, $3, $4, TRUE) RETURNING *"
+                 VALUES ($1, $2, $3, $4, TRUE) RETURNING *",
             )
             .bind(&email)
             .bind(&display_name)
@@ -137,7 +156,13 @@ pub async fn lichess_callback(
             .await
             {
                 Ok(u) => u,
-                Err(_) => return (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({"error": "Failed to create user"}))).into_response(),
+                Err(_) => {
+                    return (
+                        StatusCode::INTERNAL_SERVER_ERROR,
+                        Json(json!({"error": "Failed to create user"})),
+                    )
+                        .into_response()
+                }
             }
         }
         Err(_) => {
@@ -145,10 +170,9 @@ pub async fn lichess_callback(
                 StatusCode::INTERNAL_SERVER_ERROR,
                 Json(json!({"error": "Database error"})),
             )
-                .into_response();
+                .into_response()
         }
     };
-    // Issue tokens
     let jwt_token = match generate_access_token(user.id, &state.config.jwt_secret) {
         Ok(t) => t,
         Err(_) => {
@@ -160,7 +184,7 @@ pub async fn lichess_callback(
         }
     };
     let refresh_token = generate_refresh_token();
-    let token_hash = format!("{:x}", sha2::Sha256::digest(refresh_token.as_bytes()));
+    let token_hash = format!("{:x}", Sha256::digest(refresh_token.as_bytes()));
     let expires_at =
         chrono::Utc::now() + chrono::Duration::days(state.config.jwt_refresh_expiry_days);
     let _ = sqlx::query(
@@ -171,16 +195,15 @@ pub async fn lichess_callback(
     .bind(expires_at)
     .execute(&state.pool)
     .await;
-    // Redirect to frontend with cookies
-    let frontend_url = &state.config.frontend_url;
+    let redirect_url = format!("{}?access_token={}", state.config.frontend_url, jwt_token);
     let body = serde_json::to_string(&json!({"message": "Login successful"})).unwrap();
     axum::response::Response::builder()
         .status(StatusCode::FOUND)
-        .header("Location", frontend_url.as_str())
+        .header("Location", &redirect_url)
         .header(
             "Set-Cookie",
             format!(
-                "refresh_token={}; HttpOnly; Path=/; Max-Age={}; SameSite=Lax",
+                "refresh_token={}; HttpOnly; Path=/; Max-Age={}; SameSite=None; Secure",
                 refresh_token,
                 state.config.jwt_refresh_expiry_days * 86400
             ),
